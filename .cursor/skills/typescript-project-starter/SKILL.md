@@ -169,6 +169,59 @@ Also add a `lint` script for ESLint:
 }
 ```
 
+If the user wants **Vite hot reload for a browser app**:
+
+- Install Vite as a dev dependency:
+
+```bash
+yarn add -D vite
+```
+
+- Add Vite scripts to `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build:vite": "vite build",
+    "preview": "vite preview"
+  }
+}
+```
+
+- Create a minimal `vite.config.ts` in the project root to mirror the `@` alias:
+
+```ts
+import { defineConfig } from "vite";
+import path from "node:path";
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
+});
+```
+
+- Create a basic `index.html` if one does not exist:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TypeScript Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/index.ts"></script>
+  </body>
+</html>
+```
+
+This sets up a simple Vite-powered dev server with hot reload, without imposing any front-end framework. The user can choose React, Vue, or a custom architecture later.
+
 Avoid adding additional formatting or testing scripts unless the user explicitly requests them, or you have already confirmed they want "basic tooling".
 
 ### 7. Add a minimal ESLint configuration

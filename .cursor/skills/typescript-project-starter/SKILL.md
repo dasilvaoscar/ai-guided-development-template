@@ -169,68 +169,20 @@ Also add a `lint` script for ESLint:
 }
 ```
 
-If the user wants **Vite hot reload for a browser app**:
+If the user wants **backend-focused hot reload using `tsx`**:
 
-- Install Vite as a dev dependency:
-
-```bash
-yarn add -D vite
-```
-
-- Add Vite scripts to `package.json`:
+- Ensure `tsx` is installed as a dev dependency (see step 3).
+- Use the `watch` mode so the entrypoint is re-run on changes under `src/`:
 
 ```json
 {
   "scripts": {
-    "dev": "vite",
-    "build:vite": "vite build",
-    "preview": "vite preview"
+    "dev": "tsx watch src/index.ts"
   }
 }
 ```
 
-- Create a minimal `vite.config.ts` in the project root that both mirrors the `@` alias **and** proxies API calls to your backend during development (adjust the target URL and path prefix as needed):
-
-```ts
-import { defineConfig } from "vite";
-import path from "node:path";
-
-export default defineConfig({
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
-  server: {
-    proxy: {
-      // Forward `/api` calls from the Vite dev server to your backend.
-      // Change target/paths to match your backend's dev URL and routes.
-      "/api": {
-        target: "http://localhost:3000",
-        changeOrigin: true,
-      },
-    },
-  },
-});
-```
-
-- Create a basic `index.html` if one does not exist:
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>TypeScript Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/index.ts"></script>
-  </body>
-</html>
-```
-
-This sets up a simple Vite-powered dev server with hot reload, wired to a separate backend via a reverse proxy for paths like `/api`, without imposing any front-end framework. The user can choose React, Vue, or a custom architecture later, and can tweak the proxy config to match their backend.
+This gives a simple, Node-oriented development loop without introducing any browser bundler or frontend dev server.
 
 Avoid adding additional formatting or testing scripts unless the user explicitly requests them, or you have already confirmed they want "basic tooling".
 

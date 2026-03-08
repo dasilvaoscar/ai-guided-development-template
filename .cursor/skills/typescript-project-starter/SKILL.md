@@ -189,7 +189,7 @@ yarn add -D vite
 }
 ```
 
-- Create a minimal `vite.config.ts` in the project root to mirror the `@` alias:
+- Create a minimal `vite.config.ts` in the project root that both mirrors the `@` alias **and** proxies API calls to your backend during development (adjust the target URL and path prefix as needed):
 
 ```ts
 import { defineConfig } from "vite";
@@ -199,6 +199,16 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
+    },
+  },
+  server: {
+    proxy: {
+      // Forward `/api` calls from the Vite dev server to your backend.
+      // Change target/paths to match your backend's dev URL and routes.
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
     },
   },
 });
@@ -220,7 +230,7 @@ export default defineConfig({
 </html>
 ```
 
-This sets up a simple Vite-powered dev server with hot reload, without imposing any front-end framework. The user can choose React, Vue, or a custom architecture later.
+This sets up a simple Vite-powered dev server with hot reload, wired to a separate backend via a reverse proxy for paths like `/api`, without imposing any front-end framework. The user can choose React, Vue, or a custom architecture later, and can tweak the proxy config to match their backend.
 
 Avoid adding additional formatting or testing scripts unless the user explicitly requests them, or you have already confirmed they want "basic tooling".
 

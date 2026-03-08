@@ -46,7 +46,7 @@ If the user is vague, assume:
 In the project root:
 - Ensure **NVM** is available (this skill assumes NVM is installed and used to manage Node versions).
 - Decide on the exact **Node LTS version** to use:
-  - Prefer a specific LTS major or version string (for example: `20` or `v20.11.0`), either provided by the user or chosen as the latest LTS.
+  - Prefer a specific LTS major or version string (for example: `24`), either provided by the user or chosen as the latest LTS.
 - Configure `.nvmrc`:
   - If `.nvmrc` does not exist, create it in the project root with the chosen Node LTS version string as its only content.
   - If `.nvmrc` already exists and clearly points to a non-LTS version, suggest updating it to the desired LTS version.

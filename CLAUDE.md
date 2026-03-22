@@ -29,3 +29,7 @@ The `description` field determines when the skill auto-loads based on prompt rel
 
 - **`backend-architecture`** — Clean Architecture for backend/API projects.
 - **`frontend-architecture`** — Next.js modular architecture with dependency inversion for drivers and adapters.
+
+### Testing
+
+- **`unit-testing`** — Unit testing guide. Identifies context (frontend, backend TS, backend Go) and applies the corresponding reference: Vitest + RTL for frontend, Vitest for backend TS, Go `testing` + testify for backend Go.

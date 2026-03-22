@@ -33,3 +33,7 @@ The `description` field determines when the skill auto-loads based on prompt rel
 ### Testing
 
 - **`unit-testing`** — Unit testing guide. Identifies context (frontend, backend TS, backend Go) and applies the corresponding reference: Vitest + RTL for frontend, Vitest for backend TS, Go `testing` + testify for backend Go.
+
+### Documentation
+
+- **`backend-endpoint-docs`** — Generates a structured markdown doc for a single HTTP endpoint in `docs/endpoints/`. Covers description, business rules, request/response schema, HTTP examples, Mermaid flow diagram, side effects, and related code references.
